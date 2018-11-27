@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.byby.mapper.user.UserMapper">
+  <resultMap id="BaseResultMap" type="com.feri.byby.domain.user.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, nickname, phone, password, createtime, flag
+  </sql>
+  <select id="selectByName"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where nickname=#{name} or phone=#{name}
+  </select>
+
+  <insert id="insert" parameterType="com.feri.byby.domain.user.User">
+    insert into t_user ( nickname, phone,
+      password, createtime, flag)
+    values (#{nickname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},  #{password,jdbcType=VARCHAR}, now(), 1 )
+  </insert>
+
+  <update id="updatePassword" >
+    update t_user
+    set  password = #{password}
+    where nickname=#{nickname}
+  </update>
+
+  <update id="updateFlag" >
+    update t_user
+    set flag = #{flag}
+    where id=#{id}
+  </update>
+</mapper>

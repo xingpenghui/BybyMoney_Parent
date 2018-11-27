@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.feri</groupId>
+    <artifactId>BybyMoney_Parent</artifactId>
+    <version>1.0.0</version>
+    <modules>
+        <module>BybyMoney_Domain</module>
+        <module>BybyMoneu_Common</module>
+        <module>BybyMoney_Mapper</module>
+        <module>BybyMoney_Service</module>
+        <module>BybyMoney_AppData</module>
+        <module>BybyMoney_AdminWeb</module>
+        <module>BybyMoney_LoginData</module>
+        <module>BybyMoney_UserProvider</module>
+    </modules>
+    <packaging>pom</packaging>
+    <!--1、依赖管理-->
+    <!--1、版本声明-->
+    <properties>
+        <spring.version>5.1.2.RELEASE</spring.version>
+        <mybatisspring.version>1.3.2</mybatisspring.version>
+        <mybatis.version>3.4.6</mybatis.version>
+        <mysql.version>8.0.13</mysql.version>
+        <druid.version>1.1.12</druid.version>
+        <slf4j.version>1.7.25</slf4j.version>
+    </properties>
+    <!--2、版本限定-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatisspring.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+</project>

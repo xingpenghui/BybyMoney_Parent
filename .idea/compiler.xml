@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="BybyMoneu_Common" />
+        <module name="BybyMoney_AdminWeb" />
+        <module name="BybyMoney_AppData" />
+        <module name="BybyMoney_Domain" />
+        <module name="BybyMoney_LoginData" />
+        <module name="BybyMoney_Mapper" />
+        <module name="BybyMoney_Service" />
+        <module name="BybyMoney_UserProvider" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
