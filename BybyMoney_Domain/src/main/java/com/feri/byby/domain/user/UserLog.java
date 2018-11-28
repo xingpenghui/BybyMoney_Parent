@@ -8,6 +8,15 @@ public class UserLog {
     private Integer uid;
 
     private String content;
+    private String ip;
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
     private Date createtime;
 
@@ -41,5 +50,14 @@ public class UserLog {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    public UserLog() {
+    }
+
+    public UserLog(Integer uid, String content, String ip) {
+        this.uid = uid;
+        this.content = content;
+        this.ip = ip;
     }
 }

@@ -16,8 +16,8 @@
     from t_userlog
   </select>
   <insert id="insert" parameterType="com.feri.byby.domain.user.UserLog">
-    insert into t_userlog ( uid, content,  createtime)
-    values ( #{uid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR},  now())
+    insert into t_userlog ( uid, content,  createtime,ip)
+    values ( #{uid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR},  now(),#{ip})
   </insert>
 
 </mapper>

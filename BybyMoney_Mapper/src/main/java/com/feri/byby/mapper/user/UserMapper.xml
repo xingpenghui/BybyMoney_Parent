@@ -19,16 +19,15 @@
     where nickname=#{name} or phone=#{name}
   </select>
 
-  <insert id="insert" parameterType="com.feri.byby.domain.user.User">
-    insert into t_user ( nickname, phone,
-      password, createtime, flag)
+  <insert id="insert" parameterType="com.feri.byby.domain.user.User" useGeneratedKeys="true" keyProperty="id">
+    insert into t_user (nickname, phone, password, createtime, flag)
     values (#{nickname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},  #{password,jdbcType=VARCHAR}, now(), 1 )
   </insert>
 
   <update id="updatePassword" >
     update t_user
     set  password = #{password}
-    where nickname=#{nickname}
+    where id=#{id}
   </update>
 
   <update id="updateFlag" >

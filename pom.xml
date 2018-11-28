@@ -16,6 +16,7 @@
         <module>BybyMoney_AdminWeb</module>
         <module>BybyMoney_LoginData</module>
         <module>BybyMoney_UserProvider</module>
+        <module>Swagger_Web</module>
     </modules>
     <packaging>pom</packaging>
     <!--1、依赖管理-->
@@ -27,6 +28,14 @@
         <mysql.version>8.0.13</mysql.version>
         <druid.version>1.1.12</druid.version>
         <slf4j.version>1.7.25</slf4j.version>
+        <zkclient.version>0.11</zkclient.version>
+        <dubbo.version>2.6.2</dubbo.version>
+        <curator.version>4.0.1</curator.version>
+        <swagger.version>2.9.2</swagger.version>
+        <jackson.version>2.9.7</jackson.version>
+        <aspectj.version>1.9.2</aspectj.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <!--2、版本限定-->
     <dependencyManagement>
@@ -35,6 +44,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
@@ -68,8 +83,88 @@
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.101tec/zkclient -->
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alibaba/dubbo -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-client -->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-client</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-framework -->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
 
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <!--修改Maven默认的jdk版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

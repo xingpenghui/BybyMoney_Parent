@@ -11,4 +11,16 @@
     <artifactId>BybyMoney_Service</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.feri</groupId>
+            <artifactId>BybyMoney_Domain</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.feri</groupId>
+            <artifactId>BybyMoneu_Common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 </project>
