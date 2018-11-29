@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--使用Dubbo消费服务-->
+    <!--1、设置名称-->
+    <dubbo:application name="ssoColumn"></dubbo:application>
+    <!--2、设置注册中心-->
+    <dubbo:registry protocol="zookeeper" address="10.8.162.28:2181"></dubbo:registry>
+    <!--3、设置Dubbo的协议-->
+    <dubbo:protocol name="dubbo" port="20883"></dubbo:protocol>
+    <!--4、设置需要发布的服务-->
+    <dubbo:reference interface="com.feri.byby.service.SSOService" timeout="5000" id="ssoProvider" retries="0"></dubbo:reference>
+</beans>

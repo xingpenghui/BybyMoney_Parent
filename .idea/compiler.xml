@@ -13,6 +13,7 @@
         <module name="BybyMoney_LoginData" />
         <module name="BybyMoney_Mapper" />
         <module name="BybyMoney_Service" />
+        <module name="BybyMoney_SSOProvider" />
         <module name="BybyMoney_UserProvider" />
         <module name="Swagger_Web" />
       </profile>

@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/BybyMoney_Domain" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BybyMoney_LoginData" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BybyMoney_Mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BybyMoney_SSOProvider" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BybyMoney_Service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BybyMoney_UserProvider" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Swagger_Web" charset="UTF-8" />
