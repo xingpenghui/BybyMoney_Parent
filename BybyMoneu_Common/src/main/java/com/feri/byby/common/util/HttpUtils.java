@@ -5,12 +5,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -20,12 +16,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 /**
  * @author xing
  */
 public class HttpUtils {
-
 	//基于HttpURLConnection
 	public static String getLocation(String ip) {
 		BufferedReader reader=null;
@@ -155,8 +149,4 @@ public class HttpUtils {
 		HttpEntity httpEntity=client.execute(httpPost).getEntity();
 		return EntityUtils.toString(httpEntity,"UTF-8");
 	}
-
-
-
-
 }

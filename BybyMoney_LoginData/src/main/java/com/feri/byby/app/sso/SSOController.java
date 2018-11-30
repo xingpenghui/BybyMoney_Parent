@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 public class SSOController {
     @Autowired
     private SSOService ssoService;
-
     //登录
     @PostMapping("userlogin")
     public ResultBean login(String name, String password, HttpServletRequest request, HttpServletResponse response){
@@ -43,7 +42,11 @@ public class SSOController {
         }else{
             //存在Token
             //校验Token
-            return ssoService.checkLogin(token);
+            ResultBean rb= ssoService.checkLogin(token);
+            Cookie cookie=new Cookie(SystemCon.TOKECOOKIE,"");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+            return rb;
         }
     }
     //检查是否登录
@@ -51,11 +54,9 @@ public class SSOController {
     public ResultBean check(HttpServletRequest request,HttpServletResponse response){
         String tk=CookieUtil.getCk(request,SystemCon.TOKECOOKIE);
         ResultBean resultBean=ssoService.checkLogin(tk);
-        if(resultBean.getCode()==SystemCon.ROK){
+        if(resultBean.getCode()!=SystemCon.ROK){
             //存在就刷新时间
-            CookieUtil.setCK(response,SystemCon.TOKECOOKIE,TokenUtil.updateToken(TokenUtil.parseToken(tk)));
-
-        }else{
+            //CookieUtil.setCK(response,SystemCon.TOKECOOKIE,TokenUtil.updateToken(TokenUtil.parseToken(tk)));
             //Token无效 Cookie就需要删除
             Cookie cookie=new Cookie(SystemCon.TOKECOOKIE,"");
             cookie.setMaxAge(0);

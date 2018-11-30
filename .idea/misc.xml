@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/BybyMoney_AdminWeb" />
     <file type="web" url="file://$PROJECT_DIR$/BybyMoney_AppData" />
     <file type="web" url="file://$PROJECT_DIR$/BybyMoney_LoginData" />
     <file type="web" url="file://$PROJECT_DIR$/BybyMoney_SSOProvider" />

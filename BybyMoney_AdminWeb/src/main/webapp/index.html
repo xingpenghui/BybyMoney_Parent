@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>千锋网站后台模板</title>
+    <link rel="stylesheet" href="media/layui/css/layui.css">
+    <script type="application/javascript" src="media/js/app.js"></script>
+    <style type="text/css">
+        iframe{
+            width: 90%;
+            height:90%;
+        }
+        .layui-tab-item{
+            width: 90%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">LoveJob</div>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <button class="layui-btn">我的消息<span class="layui-badge layui-bg-gray">10</span></button>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="media/image/qm2.jpg" class="layui-nav-img" >
+                    <label id="lb1">Feri</label>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/adminloginout.do">注销</a></li>
+        </ul>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" id="leftMenu">
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body" style="width: 100%;height: 95%;">
+            <!-- 内容主体区域 -->
+            <div class="layui-tab" lay-filter="optab" style="width: 100%;height: 90%">
+                <ul class="layui-tab-title"></ul>
+                <div class="layui-tab-content" style="width: 99%;height: 90%"></div>
+            </div>
+    </div>
+    <div class="layui-footer" style="text-align: center">
+        <p>
+            Copyright 2011-2018 <a href="http://www.1000phone.com/"
+                                   rel="nofollow" target="_blank" title="千锋互联">北京爱工作科技有限公司 Feri
+            版权所有</a> 京ICP备12003911号-3 京公网安备11010802011455号
+        </p>
+    </div>
+</div>
+<script type="application/javascript" src="media/js/jquery.min.js"></script>
+<script src="media/layui/layui.js"></script>
+<script>
+    var element;
+    var arrids;
+    //JavaScript代码区域
+    layui.use('element', function(){
+        element = layui.element;
+        arrids=new Array();
+        initMenu();
+    });
+    //加载菜单
+    function initMenu() {
+        $("#lb1").html(username);
+        $.get("adminmenus.do",null,function (arr) {
+            console.log(arr);
+            var res="";
+            for(var i=0;i<arr.length;i++){
+                res+=" <li class=\"layui-nav-item layui-nav-itemed\">\n" +
+                    " <a><i class=\"layui-icon "+arr[i].parent.icon+"\"></i>"+arr[i].parent.name+"</a>";
+                if(arr[i].childrens.length>0){
+                    //有子菜单
+                   res+=" <dl class=\"layui-nav-child\">";
+                    for(var j=0;j<arr[i].childrens.length;j++){
+                        var obj=arr[i].childrens[j];
+                        res+=" <dd><a href=\"javascript:showTab("+obj.id+",'"+obj.name+"','"+obj.pers+"');\">"+obj.name+"</a></dd>";
+                    }
+                   res+=" </dl>";
+                }
+               res+="</li>";
+            }
+            $("#leftMenu").html(res);
+            element.render();
+        })
+    }
+    function checkId(id){
+        for(var i=0;i<arrids.length;i++){
+            if(arrids[i]==id){
+                return true;
+            }
+        }
+        return false;
+    }
+    //创建选项卡
+    function showTab(id,title,url) {
+            // element.tabDelete('optab',tid);
+        if(!checkId(id)) {
+            element.tabAdd('optab', {
+                title: title,
+                content: "<iframe  data-frameid='" + id + "' src='" + url + "' frameborder='0' scrolling='auto'></iframe>",
+                id: id});
+            arrids[arrids.length]=id;
+        }
+        element.tabChange('optab',id);
+        element.render();
+    }
+</script>
+</body>
+</html>

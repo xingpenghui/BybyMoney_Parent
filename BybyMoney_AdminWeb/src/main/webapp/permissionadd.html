@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoveJob-资源新增</title>
+    <link rel="stylesheet" href="media/layui/css/layui.css">
+    <script type="application/javascript" src="media/js/jquery.min.js"></script>
+    <script type="application/javascript" src="media/layui/layui.js"></script>
+</head>
+<body>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>新增资源</legend>
+</fieldset>
+<form class="layui-form"  action="/permissionsave.do" method="post">
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称：</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" lay-verify="required" placeholder="请输入名称……"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型：</label>
+        <div class="layui-input-block">
+            <input type="radio" name="type" value="1" lay-filter="changesel" title="菜单" >
+            <input type="radio" name="type" value="2" lay-filter="changesel" title="按钮" checked >
+        </div>
+    </div>
+    <!---->
+    <div id="dv1" class="layui-form-item" style="display: none">
+        <label class="layui-form-label">菜单级别：</label>
+        <div class="layui-input-block">
+            <input type="radio" name="menu" value="1" lay-filter="changetxt" title="一级菜单" checked>
+            <input type="radio"  name="menu" value="2" lay-filter="changetxt" title="二级菜单" >
+        </div>
+    </div>
+    <div class="layui-form-item" >
+        <div class="layui-inline" id="slevel1" style="display: none">
+            <label class="layui-form-label">上级菜单：</label>
+            <div class="layui-input-inline">
+                <select name="parentid" id="selmenu">
+                    <option value="-1">---请选择上级菜单---</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">菜单路径：</label>
+            <div class="layui-input-block">
+                <input type="text"  name="per" placeholder="请输入权限或路径"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" id="dvicon" style="display: none">
+        <label class="layui-form-label">图标：</label>
+        <div class="layui-input-block">
+            <input type="text" name="icon"  class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="formDemo">新增权限</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script>
+    var form;
+    layui.use(['form'], function() {
+        form = layui.form;
+        initMenu();
+        form.on('radio(changesel)', function(data){
+            var t=data.value;
+            if(t=="1"){
+                //菜单
+                $("#dv1").css("display","block");
+                $("#dvicon").css("display","block");//隐藏
+            }else{
+                //按钮
+                $("#dv1").css("display","none");
+                $("#dvicon").css("display","none");//隐藏
+            }
+
+            form.render();
+        });
+        form.on('radio(changetxt)', function(data){
+            var t=data.value;
+            if(t=="1"){
+                //一级菜单
+                $("#slevel1").css("display","none");//隐藏
+                $("#dvicon").css("display","block");//显示
+            } else{
+                $("#slevel1").css("display","block");
+                $("#dvicon").css("display","none");//隐藏
+            }
+            form.render();
+        });
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            console.log(data.field)
+            layer.msg(JSON.stringify(data.field));
+            return true;
+        });
+    });
+    //加载一级菜单
+    function initMenu() {
+        $.get("permissionmenu.do",null,function (arr) {
+            $("#selmenu").html("<option value=\"-1\">---请选择上级菜单---</option>");
+            for(var i=0;i<arr.length;i++){
+                $("#selmenu").append("<option value='"+arr[i].id+"'>"+arr[i].name+"</option>")
+            }
+            form.render();
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoveJob_管理员列表</title>
+    <link rel="stylesheet" href="media/layui/css/layui.css">
+    <script type="application/javascript" src="media/js/jquery.min.js"></script>
+    <script type="application/javascript" src="media/layui/layui.js"></script>
+</head>
+<body>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>管理员列表</legend>
+    </fieldset>
+    <table id="userdata" lay-filter="tableop"></table>
+    <script type="text/html" id="tarop">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" >删除</a>
+    </script>
+
+<script type="application/javascript">
+    var form;
+    layui.use(['table','form'], function() {
+        var table = layui.table;
+        form=layui.form;
+        initData();
+        //第一个实例
+        table.render({
+            elem: '#userdata'
+            , height: 'full-40'
+            , url: 'adminpage.do' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID',  sort: true, fixed: 'left'}
+                , {field: 'username', title: '用户名'}
+                , {field: 'phone', title: '手机号'}
+                , {field: 'password', title: '密码',templet: function(d){
+                        var r="";
+                        for(var i=0;i<d.password.length;i++){
+                            r+="*";
+                        }
+                        return r;
+                    }
+                }
+                , {field: 'flag', title: '状态', templet: function(d){
+                        var r="";
+                        var color="";
+                        switch (d.flag){
+                            case 1: r="有效";color="layui-bg-green";break;
+                            case 2: r="临时无效";color="layui-bg-red";break;
+                            case 3: r="无效";color="layui-bg-blue";break;
+                        }
+                        return "<label class='"+color+"'>"+r+"</label>";
+                    }
+                },{fixed:'right', title: '操作',toolbar:"#tarop"}
+            ]]
+        });
+        //监听工具条
+        table.on('tool(tableop)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+               // layer.msg('ID：'+ data.id + ' 的查看操作');
+                $("#dvf1").val(data.name);
+                checkRid(data.id);//选中当前用户的角色
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            }
+        });
+    });
+
+    //加载初始化数据
+    function initData() {
+        $.get("roleall.do",null,function (arr) {
+            $("#dvf2").html("");
+            for(var i=0;i<arr.length;i++){
+                $("#dvf2").append(" <input type=\"checkbox\" class='ridcb' id=\"rid"+arr[i].id+"\" name=\"rid\" value=\""+arr[i].id+"\" title=\""+arr[i].info+"\" >");
+            }
+            form.render();
+        })
+    }
+    //选中已有角色
+    function checkRid(uid) {
+        $.get("roleaid.do","aid="+uid,function (arr) {
+            $(".ridcb").attr("checked",false);
+            for(var i=0;i<arr.length;i++){
+                $("#rid"+arr[i]).attr("checked",true);
+            }
+            checkPer();
+            form.render();
+
+        });
+    }
+    //验证权限并显示弹窗
+    function checkPer() {
+        //校验权限
+        $.get("shiropercheck.do","per=uredit",function (data) {
+            var r;
+            if(data==0){
+             //有
+                r=true;
+            }else{
+               //没有
+                r=false;
+            }
+            //借助LayUI的弹出窗 实现编辑
+            layer.open({
+                type:1,
+                area: ['500px', '300px'],
+                title:"用户角色",
+                content:$('#divplay'),
+                btn:["确定修改","关闭"],
+                yes:function(index, layero){
+                    if(r){
+                        $.ajax({
+                            url:"userroleedit.do",
+                            method:"post",
+                            data: $("#fm1").serialize(),
+                            success:function (data) {
+                                if(data==0){
+                                    layer.msg("修改用户角色成功");
+                                }else {
+                                    layer.msg("服务器异常，请稍后再试！");
+                                }
+                            }
+                        });
+                    }else {
+                        layer.msg("亲，暂无权限，请联系管理员！");
+                    }
+                }
+            })
+        })
+    }
+</script>
+</body>
+<div style="display: none;margin-top: 20px" id="divplay">
+    <form  class="layui-form" id="fm1" action="usersave.do" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名：</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" readonly id="dvf1" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色：</label>
+            <div class="layui-input-block" id="dvf2">
+            </div>
+        </div>
+    </form>
+</div>
+</html>
