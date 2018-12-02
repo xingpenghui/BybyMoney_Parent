@@ -12,6 +12,7 @@
         <module name="BybyMoney_Domain" />
         <module name="BybyMoney_LoginData" />
         <module name="BybyMoney_Mapper" />
+        <module name="BybyMoney_OSSData" />
         <module name="BybyMoney_Service" />
         <module name="BybyMoney_SSOProvider" />
         <module name="BybyMoney_UserProvider" />
