@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/BybyMoney_AdminWeb" />
     <file type="web" url="file://$PROJECT_DIR$/BybyMoney_AppData" />
+    <file type="web" url="file://$PROJECT_DIR$/BybyMoney_EsData" />
     <file type="web" url="file://$PROJECT_DIR$/BybyMoney_LoginData" />
     <file type="web" url="file://$PROJECT_DIR$/BybyMoney_OSSData" />
     <file type="web" url="file://$PROJECT_DIR$/BybyMoney_SSOProvider" />

@@ -10,6 +10,7 @@
         <module name="BybyMoney_AdminWeb" />
         <module name="BybyMoney_AppData" />
         <module name="BybyMoney_Domain" />
+        <module name="BybyMoney_EsData" />
         <module name="BybyMoney_LoginData" />
         <module name="BybyMoney_Mapper" />
         <module name="BybyMoney_OSSData" />
