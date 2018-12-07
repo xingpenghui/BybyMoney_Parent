@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.byby.mapper.protype.AtrSetMapper">
+  <resultMap id="BaseResultMap" type="com.feri.byby.domain.protype.AtrSet">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="property" jdbcType="VARCHAR" property="property" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, property, info, createtime
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_atrset
+  </select>
+  <select id="selectByPtid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_atrset where ptid=#{ptid}
+  </select>
+
+  <insert id="insert" parameterType="com.feri.byby.domain.protype.AtrSet">
+    insert into t_atrset (property, info, createtime)
+    values (#{property,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, now())
+  </insert>
+
+</mapper>

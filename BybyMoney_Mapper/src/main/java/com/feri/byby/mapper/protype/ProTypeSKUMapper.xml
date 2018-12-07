@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.byby.mapper.protype.ProTypeSKUMapper">
+  <resultMap id="BaseResultMap" type="com.feri.byby.domain.protype.ProTypeSKU">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ptid" jdbcType="INTEGER" property="ptid" />
+    <result column="asid" jdbcType="INTEGER" property="asid" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ptid, asid, flag
+  </sql>
+  <select id="selectByPtid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_protypesku
+    where ptid = #{ptid,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.feri.byby.domain.protype.ProTypeSKU">
+    insert into t_protypesku (ptid, asid, flag)
+    values (#{ptid,jdbcType=INTEGER}, #{asid,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER})
+  </insert>
+
+</mapper>

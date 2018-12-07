@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.byby.mapper.protype.BrandMapper">
+  <resultMap id="BaseResultMap" type="com.feri.byby.domain.protype.Brand">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="bname" jdbcType="VARCHAR" property="bname" />
+    <result column="bdate" jdbcType="DATE" property="bdate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.feri.byby.domain.protype.Brand">
+    <result column="bcontent" jdbcType="LONGVARCHAR" property="bcontent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, bname, bdate,bcontent
+  </sql>
+
+  <select id="selectAll"  resultMap="ResultMapWithBLOBs">
+    select <include refid="Base_Column_List" /> from t_brand
+  </select>
+
+  <insert id="insert" parameterType="com.feri.byby.domain.protype.Brand">
+    insert into t_brand (bname, bdate,  bcontent)
+    values (#{id,jdbcType=INTEGER}, #{bname,jdbcType=VARCHAR}, now(),  #{bcontent,jdbcType=LONGVARCHAR})
+  </insert>
+</mapper>

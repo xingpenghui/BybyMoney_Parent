@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.byby.mapper.product.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.feri.byby.domain.product.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="ptid" jdbcType="INTEGER" property="ptid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="ptime" jdbcType="TIMESTAMP" property="ptime" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, no, ptid, pname, ptime, flag
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" resultMap="BaseResultMap">
+    select COUNT(*) from t_product
+  </select>
+  <select id="selectPage" resultMap="BaseResultMap">
+    select * from t_product limit #{index},#{count}
+  </select>
+  <insert id="insert" parameterType="com.feri.byby.domain.product.Product">
+    insert into t_product (no, ptid, pname, ptime, flag)
+    values ( #{no,jdbcType=VARCHAR}, #{ptid,jdbcType=INTEGER},  #{pname,jdbcType=VARCHAR}, now(), 1)
+  </insert>
+
+  <update id="updateById" parameterType="com.feri.byby.domain.product.Product">
+    update t_product
+    set no = #{no,jdbcType=VARCHAR},
+      ptid = #{ptid,jdbcType=INTEGER},
+      pname = #{pname,jdbcType=VARCHAR},
+      ptime = #{ptime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

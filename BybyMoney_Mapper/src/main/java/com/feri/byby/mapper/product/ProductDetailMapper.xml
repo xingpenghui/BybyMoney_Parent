@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.byby.mapper.product.ProductDetailMapper">
+  <resultMap id="BaseResultMap" type="com.feri.byby.domain.product.ProductDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
+    <result column="commonsku" jdbcType="LONGVARCHAR" property="commonsku" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, detail, commonsku
+  </sql>
+  <select id="selectByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_prodetail
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+
+  <insert id="insert">
+    insert into t_prodetail (pid, detail, commonsku)
+    values ( #{pid,jdbcType=INTEGER}, #{detail,jdbcType=LONGVARCHAR},  #{commonsku,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <update id="updateByPid" parameterType="com.feri.byby.domain.product.ProductDetail">
+    update t_prodetail
+    set commonsku = #{commonsku,jdbcType=INTEGER},detail=#{detail}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

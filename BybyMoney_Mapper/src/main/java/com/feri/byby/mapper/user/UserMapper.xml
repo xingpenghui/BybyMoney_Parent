@@ -18,7 +18,12 @@
     from t_user
     where nickname=#{name} or phone=#{name}
   </select>
-
+  <select id="selectCount"  resultMap="BaseResultMap">
+    select COUNT(*) from t_user ;
+  </select>
+  <select id="selectPage"  resultMap="BaseResultMap">
+    select * from t_user order by createtime limit #{index},#{count} ;
+  </select>
   <insert id="insert" parameterType="com.feri.byby.domain.user.User" useGeneratedKeys="true" keyProperty="id">
     insert into t_user (nickname, phone, password, createtime, flag)
     values (#{nickname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},  #{password,jdbcType=VARCHAR}, now(), 1 )

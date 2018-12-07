@@ -19,6 +19,6 @@
     </bean>
     <!--4、配置MyBatis的扫描-->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.feri.byby.admin.mapper"></property>
+        <property name="basePackage" value="com.feri.byby.admin.mapper,com.feri.byby.mapper.user,com.feri.byby.mapper.product,com.feri.byby.mapper.protype"></property>
     </bean>
 </beans>

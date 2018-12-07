@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.byby.mapper.product.ProLogMapper">
+  <resultMap id="BaseResultMap" type="com.feri.byby.domain.product.ProLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, content, type, createtime
+  </sql>
+  <select id="selectByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_prolog
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+
+  <insert id="insert" parameterType="com.feri.byby.domain.product.ProLog">
+    insert into t_prolog ( content, type, createtime)
+    values ( #{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, now())
+  </insert>
+</mapper>

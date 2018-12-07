@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.byby.mapper.product.ProSKUMapper">
+  <resultMap id="BaseResultMap" type="com.feri.byby.domain.product.ProSKU">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pskujson" jdbcType="VARCHAR" property="pskujson" />
+    <result column="modtime" jdbcType="TIMESTAMP" property="modtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, pskujson, modtime
+  </sql>
+  <select id="selectByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_prosku
+    where pid = #{pid,jdbcType=INTEGER} order by id
+  </select>
+
+  <insert id="insert" parameterType="com.feri.byby.domain.product.ProSKU">
+    insert into t_prosku ( pid, pskujson, modtime)
+    values ( #{pid,jdbcType=INTEGER}, #{pskujson,jdbcType=VARCHAR}, now())
+  </insert>
+</mapper>

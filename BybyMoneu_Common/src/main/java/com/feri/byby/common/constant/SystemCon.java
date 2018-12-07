@@ -25,6 +25,9 @@ public class SystemCon {
     public static final String TOKECOOKIE="usertoken";
     public static final String TOKENPRE="token:";
 
+    //Redis存储的共有信息的key
+    public static final String PROTYPES="protypes";
+
 
 
 }

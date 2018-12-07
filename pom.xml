@@ -20,6 +20,7 @@
         <module>BybyMoney_SSOProvider</module>
         <module>BybyMoney_OSSData</module>
         <module>BybyMoney_EsData</module>
+        <module>BybyMoney_ProductProvider</module>
     </modules>
     <packaging>pom</packaging>
     <!--1、依赖管理-->

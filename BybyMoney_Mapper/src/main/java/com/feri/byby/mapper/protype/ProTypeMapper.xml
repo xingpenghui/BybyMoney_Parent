@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.byby.mapper.protype.ProTypeMapper">
+  <resultMap id="BaseResultMap" type="com.feri.byby.domain.protype.ProType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+    <result column="parentid" jdbcType="INTEGER" property="parentid" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tname, parentid, flag, createtime
+  </sql>
+  <select id="selectByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from t_protype
+  where parentid = #{parentid,jdbcType=INTEGER}
+</select>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_protype
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_protype
+  </select>
+  <select id="selectByLevel" resultType="com.feri.byby.domain.protype.ProType">
+  select p.*,p2.tname parentname from t_protype p left join t_protype p2 on p.parentid=p2.id where p.level=#{level} order by p.parentid asc;
+  </select>
+  <insert id="insert" parameterType="com.feri.byby.domain.protype.ProType">
+    insert into t_protype (tname, parentid,flag,createtime)
+    values (#{tname,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}, now())
+  </insert>
+</mapper>
