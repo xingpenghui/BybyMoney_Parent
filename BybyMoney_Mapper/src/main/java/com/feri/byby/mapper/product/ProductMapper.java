@@ -1,5 +1,6 @@
 package com.feri.byby.mapper.product;
 
+import com.feri.byby.common.vo.ProductVo;
 import com.feri.byby.domain.product.Product;
 import com.feri.byby.domain.user.User;
 import org.apache.ibatis.annotations.Param;
@@ -17,5 +18,10 @@ public interface ProductMapper {
     long selectCount();
 
     List<Product> selectPage(@Param("index") int index, @Param("count") int count);
+
+    //
+    List<ProductVo> selectNew();
+    List<ProductVo> selectCx();
+    List<ProductVo> selectRx();
 
 }

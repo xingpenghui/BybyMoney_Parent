@@ -38,4 +38,32 @@
       flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectNew" resultType="com.feri.byby.common.vo.ProductVo">
+    select p.*,pm.presurl url,pp.minold ,pp.mincurr,pp.maxold,pp.maxcurr
+from t_product p
+left join t_promedia pm on p.id=pm.pid and pm.flag=1 left join (
+ select MIN(oldprice) minold,MAX(oldprice) maxold,
+ MIN(currprice) mincurr,MAX(currprice) maxcurr,ps.pid
+ from  t_prosku ps
+ left join t_propricesku pps on ps.id=pps.psid group by ps.pid) pp
+ on pp.pid=p.id
+ where p.flag=1 order by p.ptime desc limit 4;
+  </select>
+
+  <select id="selectCx" resultType="com.feri.byby.common.vo.ProductVo">
+     select p.*,pm.presurl url,pp.minold ,pp.mincurr,pp.maxold,pp.maxcurr
+from t_product p
+left join t_promedia pm on p.id=pm.pid and pm.flag=1 left join (
+ select MIN(oldprice) minold,MAX(oldprice) maxold,
+ MIN(currprice) mincurr,MAX(currprice) maxcurr,ps.pid
+ from  t_prosku ps
+ left join t_propricesku pps on ps.id=pps.psid group by ps.pid) pp
+ on pp.pid=p.id
+ where p.flag=1 order by p.ptime desc limit 4;
+  </select>
+
+  <select id="selectRx" resultType="com.feri.byby.common.vo.ProductVo">
+    select * from t_product limit #{index},#{count}
+  </select>
 </mapper>

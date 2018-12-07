@@ -11,7 +11,6 @@ import com.feri.byby.mapper.protype.ProTypeMapper;
 import com.feri.byby.service.ProTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.Map;
  *@Author feri
  *@Date Created in 2018/12/7 09:50
  */
-@Service
+@Service("protypeprovider")
 public class ProTypeProvider implements ProTypeService {
     @Autowired
     private ProTypeMapper mapper;

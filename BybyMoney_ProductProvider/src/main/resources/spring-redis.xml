@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--1、配置Redis-->
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="host" value="${redis.host}"></constructor-arg>
+        <constructor-arg name="port" value="${redis.port}"></constructor-arg>
+    </bean>
+    <!--2、配置Redis对象-->
+    <bean id="jedisUtil" class="com.feri.byby.common.redis.JedisUtil">
+        <constructor-arg name="jedisPool" ref="jedisPool"></constructor-arg>
+        <constructor-arg name="password" value="${redis.pass}"></constructor-arg>
+    </bean>
+</beans>
