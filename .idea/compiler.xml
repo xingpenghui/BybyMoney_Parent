@@ -13,6 +13,7 @@
         <module name="BybyMoney_EsData" />
         <module name="BybyMoney_LoginData" />
         <module name="BybyMoney_Mapper" />
+        <module name="BybyMoney_MQListener" />
         <module name="BybyMoney_OSSData" />
         <module name="BybyMoney_ProductProvider" />
         <module name="BybyMoney_Service" />
