@@ -22,6 +22,7 @@
         <module>BybyMoney_EsData</module>
         <module>BybyMoney_ProductProvider</module>
         <module>BybyMoney_MQListener</module>
+        <module>BybyMoney_PayData</module>
     </modules>
     <packaging>pom</packaging>
     <!--1、依赖管理-->

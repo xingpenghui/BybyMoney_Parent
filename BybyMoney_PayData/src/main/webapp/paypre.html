@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信支付</title>
+    <script type="application/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="application/javascript" src="js/vue.min.js"></script>
+    <script type="application/javascript">
+       function pay() {
+           $.ajax({
+               url: $("#fm1")[0].action,
+               method: $("#fm1")[0].method,
+               data:$("#fm1").serialize(),
+               success:function (obj) {
+                   if(obj.code==100000){
+                      location.href="pay.html?id="+obj.msg;
+                   }else{
+                       alert("支付异常，请不要支付");
+                   }
+               }
+           });
+       }
+    </script>
+</head>
+<body>
+<div id="dvpay">
+    <h1>发起支付</h1>
+    <form method="post" id="fm1" action="wxpaycreate.do">
+        <label>商品名称：</label><input name="name" placeholder="请输入商品名称……"><br/>
+        <label>订单金额：</label><input placeholder="请输入金额……" name="price"><br/>
+        <input type="button" onclick="pay()" value="确认支付">
+    </form>
+</div>
+<hr/>
+<div>
+    <h1>查询订单状态</h1>
+    <form action="/wxpaychecke.do" method="post">
+        <label>订单编号：</label><input type="text" name="oid" placeholder="请输入订单编号"><br/>
+        <input type="submit" value="查询订单状态">
+    </form>
+</div>
+<hr/>
+<div>
+    <h1>取消订单支付</h1>
+    <form action="/wxpayclose.do" method="post">
+        <label>订单编号：</label><input type="text" name="oid" placeholder="请输入订单编号"><br/>
+        <input type="submit" value="取消订单">
+    </form>
+</div>
+<hr/>
+
+
+
+
+</body>
+</html>

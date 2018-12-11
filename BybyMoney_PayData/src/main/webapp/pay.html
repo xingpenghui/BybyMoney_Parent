@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付页面</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="application/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="application/javascript" src="js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .dh li{
+            background-color: gainsboro;
+        }
+    </style>
+    <script type="application/javascript">
+        $(function () {
+            var p=GetRequest;
+            $("#payimg")[0].src="payqrcode.do?oid="+p.id;
+        });
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+        <div class="row">
+            <h2 class="text-left text-success">
+              <img src="images/log.png" width="80" height="80"> 千锋郑州Java教学部收银台
+            </h2>
+        </div>
+    <div class="row" style="background-color:gainsboro;margin: 20px">
+        <div class="col-sm-8">
+            <p style="margin-top: 10px;margin-left: 20px">
+            订单编号：<span></span>
+            </p>
+            <p style="margin-left: 20px">
+                商品名称：<span></span>
+            </p>
+        </div>
+        <div class="col-sm-4" >
+            <p style="text-align: center;margin-top: 10px;margin-right: 20px">
+                应付金额：<span style="font-size: 30px;">￥88.88 元</span>
+            </p>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-sm-10 col-sm-offset-1" style="border: 2px solid gray">
+            <div class="tabbable" id="tabs-741256">
+                <ul class="nav nav-tabs dh">
+                    <li class="active">
+                          <a href="#panel-400049" data-toggle="tab">微信支付<img width="60" height="20" src="images/wxbq2.png"></a>
+                    </li>
+                    <li>
+                        <a href="#panel-250536" data-toggle="tab">银联支付</a>
+                    </li>
+                    <li>
+                        <a href="#panel-250537" data-toggle="tab">信用卡支付</a>
+                    </li>
+                    <li>
+                        <a href="#panel-250538" data-toggle="tab">其他支付</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="panel-400049">
+                        <p style="margin: 20px">
+                            <img alt="140x140" src="images/WePayLogo.png" width="200"  height="50"/>
+                        </p>
+                        <p  style="text-align: center;">
+                            <img src="images/log.png" id="payimg" width="200" height="200"/>
+                        </p>
+                        <p  style="text-align: center;">
+                            <img src="images/wxsm.png" width="200">
+                        </p>
+                    </div>
+                    <div class="tab-pane" id="panel-250536" contenteditable="true">
+                        <p>
+                           银联支付
+                        </p>
+                    </div>
+                    <div class="tab-pane" id="panel-250537" contenteditable="true">
+                        <p>
+                           信用卡支付
+                        </p>
+                    </div>
+                    <div class="tab-pane" id="panel-250538" contenteditable="true">
+                        <p>
+                            其他支付方式
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
